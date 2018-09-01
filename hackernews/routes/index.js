@@ -17,7 +17,7 @@ router.get('/', function (req, res, next) {
 
   MongoClient.connect(urlMongo, { useNewUrlParser: true }, function (err, db) {
     var dbo = db.db(dbName);
-    var query = { deleted: undefined };
+    var query = { deleted: false };
     var cursor = dbo.collection(collectionName).find(query);
     cursor.forEach(function (doc, err) {
       resultArray.push(doc);
@@ -48,11 +48,13 @@ router.get('/deleteArticle', function (req, res, next) {
   MongoClient.connect(urlMongo, { useNewUrlParser: true }, function (err, db) {
     if (err) throw err;
     var dbo = db.db(dbName);
-    var myquery = { _id: req.id };
+    console.log(req.query.id);
+    var myquery = { objectID: req.query.id };        
     var newvalues = { $set: { deleted: true } };
-    dbo.collection(collectionName).updateOne(myquery, newvalues, { upsert: false }, function (err, res) {
+
+    dbo.collection(collectionName).updateOne(myquery, newvalues, function (err, res) {
       if (err) throw err;
-      console.log("1 document updated" + res);
+      console.log("1 document updated, output: " + res);
       db.close();
     });
   });
@@ -73,8 +75,8 @@ function insertNews(newsFromApi) {
 
       news.hits.forEach(element => {
         // console.log(element);
-        // var myquery = { _id: element.objectID };
-        // var newvalues = { $set: { deleted: false } };
+
+        element.deleted = false;
 
         dbo.collection(collectionName).insertOne(element, { upsert: true }, function (err, res) {
           if (err) throw err;

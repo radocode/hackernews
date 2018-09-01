@@ -17,8 +17,19 @@ block news
       table.table        
         each val in news
           tr
-            if !val.title                                
-              td=val.story_title
-            else if !val.story_title             
-              td=val.title                       
+            if val.title                
+              td
+                if !val.story_url 
+                  a(href=val.url)=val.title
+                else
+                  a(href=val.story_url)=val.title
+            else if val.story_title
+              td                
+                if !val.story_url 
+                  a(href=val.url)=val.story_title
+                else
+                  a(href=val.story_url)=val.story_title
             td=moment(val.created_at).calendar()
+            td
+              span.glyphicon.glyphicon-trash(href='/deleteArticle?id='+val.objectID)
+
