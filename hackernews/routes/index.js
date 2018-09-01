@@ -58,7 +58,7 @@ router.get('/deleteArticle', function (req, res, next) {
       db.close();
     });
   });
-  res.send();
+  res.redirect('/');
 });
 
 // inserts all the new articles
