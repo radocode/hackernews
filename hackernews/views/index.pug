@@ -1,0 +1,24 @@
+extends layout
+
+block content
+  .container-fluid
+  .row
+    .col-md-12
+      h3
+        | HN FEED
+      h3
+        | We <3 hacker news!
+block news
+  //- ul
+  //- each val in news
+  //-   li= val
+  .row
+    .col-md-12
+      table.table        
+        each val in news
+          tr
+            if !val.title                                
+              td=val.story_title
+            else if !val.story_title             
+              td=val.title                       
+            td=moment(val.created_at).calendar()
