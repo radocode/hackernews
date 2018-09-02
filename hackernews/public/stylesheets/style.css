@@ -14,7 +14,7 @@ td {
 
 .hackerRow {
   background-color: #ffffff;
-  border: 1px #cccccc;  
+  border: 1px #cccccc;
 }
 
 .hackerRow:hover { 
@@ -23,6 +23,7 @@ td {
 
 .author {
   color: #999999;
+  float: right;
 }
 
 .date {
@@ -44,6 +45,12 @@ a:visited {
 }
 a:active {
   color: black;
+}
+
+.headerMain {
+  background-color: #484949;
+  color: white;
+  padding-left: 2% !important;
 }
 
 

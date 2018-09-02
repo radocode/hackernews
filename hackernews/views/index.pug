@@ -3,7 +3,7 @@ extends layout
 block content
   .container-fluid
   .row
-    .col-md-12
+    .col-md-12.headerMain      
       h3
         | HN FEED
       h3
@@ -15,39 +15,41 @@ block news
         tr.hackerRow
           if val.title                
             td
-              a(href=val.story_url)=val.title              
+              a(target='_blank', rel='noopener noreferrer', href=val.story_url)=val.title              
                 div.author=' - ' +val.author + ' - '
           else if val.story_title
             td
-              a(href=val.story_url)=val.story_title              
+              a(target='_blank', rel='noopener noreferrer', href=val.story_url)=val.story_title              
                 div.author=' - ' +val.author + ' - '
           td=moment(val.created_at).calendar()
           td
-            span.glyphicon.glyphicon-trash          
-              a(href='/deleteArticle?id='+val.objectID)                  
+            a(href='/deleteArticle?id='+val.objectID)                  
+              span.glyphicon.glyphicon-trash              
       else if val.url            
         tr.hackerRow
           if val.title                
             td
-              a(href=val.url)=val.title              
+              a(target='_blank', rel='noopener noreferrer', href=val.url)=val.title              
                 div.author=' - ' +val.author + ' - '
           else if val.story_title
             td
-              a(href=val.url)=val.story_title              
+              a(target='_blank', rel='noopener noreferrer', href=val.url)=val.story_title              
                 div.author=' - ' +val.author + ' - '
           td=moment(val.created_at).calendar()
-          td
-            span.glyphicon.glyphicon-trash
+          td            
               a(href='/deleteArticle?id='+val.objectID)                  
+                span.glyphicon.glyphicon-trash
       else            
         tr.hackerRow
           if val.title                
-            td=val.title              
-              div.author=' - ' +val.author  + ' - '
+            td
+              a(target='_blank', rel='noopener noreferrer', href='#')=val.title
+                div.author=' - ' +val.author  + ' - '
           else if val.story_title
-            td=val.story_title              
-              div.author=' - ' +val.author + ' - '
+            td
+              a(target='_blank', rel='noopener noreferrer', href='#')=val.story_title
+                div.author=' - ' +val.author + ' - '
           td=moment(val.created_at).calendar()
           td
-            span.glyphicon.glyphicon-trash
-              a(href='/deleteArticle?id='+val.objectID)
+            a(href='/deleteArticle?id='+val.objectID)
+              span.glyphicon.glyphicon-trash              

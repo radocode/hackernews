@@ -24,7 +24,7 @@ router.get('/', function (req, res, next) {
   MongoClient.connect(urlMongo, { useNewUrlParser: true }, function (err, db) {
     var dbo = db.db(dbName);
     var query = { deleted: false };
-    var cursor = dbo.collection(collectionName).find(query);
+    var cursor = dbo.collection(collectionName).find(query).sort({created_at: -1});
     cursor.forEach(function (doc, err) {
       resultArray.push(doc);
     }, function () {
