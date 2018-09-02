@@ -6,7 +6,13 @@ const dbName = 'hackernews';
 const collectionName = 'hackernews';
 const APIurl = "https://hn.algolia.com/api/v1/search_by_date?query=nodejs";
 var Request = require("request");
+var cron = require('cron');
 
+
+var job = new cron.CronJob('0 0 1 0 0', function () {
+  autoInsertion();
+  console.log('running automatic insertion of news NOW');
+}, null, true);
 
 /* GET home page. */
 router.get('/', function (req, res, next) {
@@ -34,10 +40,10 @@ router.get('/insertNews', function (req, res, next) {
     if (error) {
       console.log(error);
     } else {
-      res.send(insertNews(JSON.parse(body)));
+      insertNews(JSON.parse(body));
+      res.redirect('/');
     }
   });
-
 });
 
 /* POST deletes a specific article, updating its status to "deleted = true" */
@@ -46,20 +52,32 @@ router.get('/deleteArticle', function (req, res, next) {
   console.log('deleting news article from DB...');
 
   MongoClient.connect(urlMongo, { useNewUrlParser: true }, function (err, db) {
-    if (err) throw err;
+    if (err) console.log(err);
     var dbo = db.db(dbName);
     console.log(req.query.id);
-    var myquery = { objectID: req.query.id };        
+    var myquery = { objectID: req.query.id };
     var newvalues = { $set: { deleted: true } };
 
     dbo.collection(collectionName).updateOne(myquery, newvalues, function (err, res) {
-      if (err) throw err;
+      if (err) console.log(err);
       console.log("1 document updated, output: " + res);
       db.close();
     });
   });
   res.redirect('/');
 });
+
+
+function autoInsertion() {
+
+  Request.get(APIurl, (error, response, body) => {
+    if (error) {
+      console.log(error);
+    } else {
+      insertNews(JSON.parse(body));
+    }
+  });
+}
 
 // inserts all the new articles
 function insertNews(newsFromApi) {
@@ -70,20 +88,18 @@ function insertNews(newsFromApi) {
     console.log('inserting news article to DB...');
 
     MongoClient.connect(urlMongo, { useNewUrlParser: true }, function (err, db) {
-      if (err) throw err;
+      if (err) console.log(err);
       var dbo = db.db(dbName);
 
       news.hits.forEach(element => {
-        // console.log(element);
-
         element.deleted = false;
-
         dbo.collection(collectionName).insertOne(element, { upsert: true }, function (err, res) {
-          if (err) throw err;
-          console.log("Number of documents inserted: " + res);
+          if (err) console.log(err);
         });
-      });
+      });     
+
       db.close();
+      console.log('Documents inserted: ' + news.hits.length);
     });
   }
 

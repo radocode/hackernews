@@ -8,45 +8,46 @@ block content
         | HN FEED
       h3
         | We <3 hacker news!
-block news
-  //- ul
-  //- each val in news
-  //-   li= val
-  .row
-    .col-md-12
-      table.table        
-        each val in news
-          if val.story_url
-            tr
-              if val.title                
-                td
-                  a(href=val.story_url)=val.title
-              else if val.story_title
-                td
-                  a(href=val.story_url)=val.story_title   
-              td=moment(val.created_at).calendar()
-              td
-                a(href='/deleteArticle?id='+val.objectID)
-                  span.glyphicon.glyphicon-trash          
-          else if val.url
-            tr
-              if val.title                
-                td
-                  a(href=val.url)=val.title
-              else if val.story_title
-                td
-                  a(href=val.url)=val.story_title            
-              td=moment(val.created_at).calendar()
-              td
-                a(href='/deleteArticle?id='+val.objectID)
-                  span.glyphicon.glyphicon-trash
-          else
-            tr
-              if val.title                
-                td=val.title                
-              else if val.story_title
-                td=val.story_title              
-              td=moment(val.created_at).calendar()
-              td
-                a(href='/deleteArticle?id='+val.objectID)
-                  span.glyphicon.glyphicon-trash
+block news 
+  table        
+    each val in news
+      if val.story_url            
+        tr.hackerRow
+          if val.title                
+            td
+              a(href=val.story_url)=val.title              
+                div.author=' - ' +val.author + ' - '
+          else if val.story_title
+            td
+              a(href=val.story_url)=val.story_title              
+                div.author=' - ' +val.author + ' - '
+          td=moment(val.created_at).calendar()
+          td
+            span.glyphicon.glyphicon-trash          
+              a(href='/deleteArticle?id='+val.objectID)                  
+      else if val.url            
+        tr.hackerRow
+          if val.title                
+            td
+              a(href=val.url)=val.title              
+                div.author=' - ' +val.author + ' - '
+          else if val.story_title
+            td
+              a(href=val.url)=val.story_title              
+                div.author=' - ' +val.author + ' - '
+          td=moment(val.created_at).calendar()
+          td
+            span.glyphicon.glyphicon-trash
+              a(href='/deleteArticle?id='+val.objectID)                  
+      else            
+        tr.hackerRow
+          if val.title                
+            td=val.title              
+              div.author=' - ' +val.author  + ' - '
+          else if val.story_title
+            td=val.story_title              
+              div.author=' - ' +val.author + ' - '
+          td=moment(val.created_at).calendar()
+          td
+            span.glyphicon.glyphicon-trash
+              a(href='/deleteArticle?id='+val.objectID)

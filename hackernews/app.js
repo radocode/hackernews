@@ -6,8 +6,6 @@ var logger = require('morgan');
 
 var indexRouter = require('./routes/index');
 
-var cron = require('node-cron');
-
 var app = express();
 
 // view engine setup
@@ -50,9 +48,6 @@ app.use(function (err, req, res, next) {
   res.render('error');
 });
 
-// cron.schedule('* * 1 * *', function () {
-//   indexRouter.insertNews();
-//   console.log('running insertion news every hour');
-// });
+
 
 module.exports = app;

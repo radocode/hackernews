@@ -11,3 +11,39 @@ td a {
 td {
   padding:0;  
 }
+
+.hackerRow {
+  background-color: #ffffff;
+  border: 1px #cccccc;  
+}
+
+.hackerRow:hover { 
+  background-color: #fafafa;
+}
+
+.author {
+  color: #999999;
+}
+
+.date {
+  color: #333333;
+}
+
+a:hover { 
+  background-color: #fafafa;
+}
+
+a {
+  color: black;
+}
+a:link {
+  color: black;
+}
+a:visited {
+  color: black;
+}
+a:active {
+  color: black;
+}
+
+
