@@ -1,55 +1,59 @@
 extends layout
 
 block content
-  .container-fluid
-  .row
-    .col-md-12.headerMain      
-      h3
-        | HN FEED
-      h3
-        | We <3 hacker news!
+  .container-fluid 
+    .row
+      .col-md-12.headerMain      
+        h1
+          | HN FEED
+        h3
+          | We <3 hacker news!
 block news 
-  table        
-    each val in news
-      if val.story_url            
-        tr.hackerRow
-          if val.title                
-            td
-              a(target='_blank', rel='noopener noreferrer', href=val.story_url)=val.title              
-                div.author=' - ' +val.author + ' - '
-          else if val.story_title
-            td
-              a(target='_blank', rel='noopener noreferrer', href=val.story_url)=val.story_title              
-                div.author=' - ' +val.author + ' - '
-          td=moment(val.created_at).calendar()
-          td
-            a(href='/deleteArticle?id='+val.objectID)                  
-              span.glyphicon.glyphicon-trash              
-      else if val.url            
-        tr.hackerRow
-          if val.title                
-            td
-              a(target='_blank', rel='noopener noreferrer', href=val.url)=val.title              
-                div.author=' - ' +val.author + ' - '
-          else if val.story_title
-            td
-              a(target='_blank', rel='noopener noreferrer', href=val.url)=val.story_title              
-                div.author=' - ' +val.author + ' - '
-          td=moment(val.created_at).calendar()
-          td            
-              a(href='/deleteArticle?id='+val.objectID)                  
-                span.glyphicon.glyphicon-trash
-      else            
-        tr.hackerRow
-          if val.title                
-            td
-              a(target='_blank', rel='noopener noreferrer', href='#')=val.title
-                div.author=' - ' +val.author  + ' - '
-          else if val.story_title
-            td
-              a(target='_blank', rel='noopener noreferrer', href='#')=val.story_title
-                div.author=' - ' +val.author + ' - '
-          td=moment(val.created_at).calendar()
-          td
-            a(href='/deleteArticle?id='+val.objectID)
-              span.glyphicon.glyphicon-trash              
+  .container
+    .row
+      .col-md-12
+        .form
+          table        
+            each val in news
+              if val.story_url            
+                tr.hackerRow
+                  if val.title                
+                    td
+                      a(target='_blank', rel='noopener noreferrer', href=val.story_url)=val.title              
+                        div.author=' - ' +val.author + ' - '
+                  else if val.story_title
+                    td
+                      a(target='_blank', rel='noopener noreferrer', href=val.story_url)=val.story_title              
+                        div.author=' - ' +val.author + ' - '
+                  td=moment(val.created_at).calendar()
+                  td
+                    a(href='/deleteArticle?id='+val.objectID)                  
+                      span.glyphicon.glyphicon-trash              
+              else if val.url            
+                tr.hackerRow
+                  if val.title                
+                    td
+                      a(target='_blank', rel='noopener noreferrer', href=val.url)=val.title              
+                        div.author=' - ' +val.author + ' - '
+                  else if val.story_title
+                    td
+                      a(target='_blank', rel='noopener noreferrer', href=val.url)=val.story_title              
+                        div.author=' - ' +val.author + ' - '
+                  td=moment(val.created_at).calendar()
+                  td            
+                      a(href='/deleteArticle?id='+val.objectID)                  
+                        span.glyphicon.glyphicon-trash
+              else            
+                tr.hackerRow
+                  if val.title                
+                    td
+                      a(target='_blank', rel='noopener noreferrer', href='#')=val.title
+                        div.author=' - ' +val.author  + ' - '
+                  else if val.story_title
+                    td
+                      a(target='_blank', rel='noopener noreferrer', href='#')=val.story_title
+                        div.author=' - ' +val.author + ' - '
+                  td=moment(val.created_at).calendar()
+                  td
+                    a(href='/deleteArticle?id='+val.objectID)
+                      span.glyphicon.glyphicon-trash              

@@ -2,6 +2,10 @@
 *[data-href] {
   cursor: pointer;
 }
+ body {
+   background-color: #5c5f6126 !important;
+ }
+
 td a {
   display:inline-block;
   min-height:100%;
@@ -48,9 +52,21 @@ a:active {
 }
 
 .headerMain {
-  background-color: #484949;
+  background-color: #48494947;
+  text-align: center;
   color: white;
   padding-left: 2% !important;
+  height: 150px;
 }
 
+.form {
+  display: flex;
+  justify-content: center;
+  position: relative;
+  z-index: 1;
+  background: rgba(255, 255, 255, 0.79);
+  margin: 0 auto 100px;
+  padding: 45px;
+  box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+}
 
