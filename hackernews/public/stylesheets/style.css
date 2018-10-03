@@ -41,10 +41,10 @@ a:link {
   color: black;
 }
 a:visited {
-  color: black;
+  color: red;
 }
 a:active {
-  color: black;
+  color: blue;
 }
 
 .headerMain {
