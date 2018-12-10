@@ -1,5 +1,5 @@
 var MongoClient = require('mongodb').MongoClient;
-var urlMongo = "mongodb://localhost:27017/hackernews";
+var urlMongo = "mongodb://mongo:27017/hackernews";
 var express = require('express');
 var router = express.Router();
 const dbName = 'hackernews';

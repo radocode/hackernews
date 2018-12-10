@@ -1,0 +1,26 @@
+version: "2"
+services:
+  app:
+    container_name: app
+    restart: always
+    build: .
+    ports:
+      - "3000:3000"
+    links:
+      - mongo
+  mongo:
+    container_name: mongo
+    image: mongo
+    ports:
+      - "27017:27017"
+  mongoClient:
+    image: mongo
+    container_name: mongoClient
+    links:
+      - mongo
+    volumes:
+      - ./deployment_scripts:/deployment_scripts
+    command: 
+      - /deployment_scripts/init.sh
+    depends_on:
+      - mongo
