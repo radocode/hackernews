@@ -29,6 +29,16 @@ http://localhost:3000/insertNews
 
 ---------------
 
+If you have Docker installed, or want to run this app in a Docker container, just run:
+
+docker-compose up
+
+It will automatically create all the containers needed (for node + mongodb) to run this app.
+
+----------------
+
+If you are running this locally:
+
 You might want to import the database dump to your own local mongodb server, located over the DB folder, since it has the index it needs to avoid duplicate keys.
 
 In case you only want to add the constraint, just run the following on the "hackernews" collection. Make sure there is no data on it first, or it will throw a constraint error!
