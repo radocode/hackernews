@@ -1,5 +1,7 @@
 # hackernews
 
+![Node.js CI](https://github.com/radocode/hackernews/workflows/Node.js%20CI/badge.svg)
+
 Hello!
 
 This is a basic pug + express site that fetches data from a Hacker News API and inserts it into your local MongoDB (default port) server.
